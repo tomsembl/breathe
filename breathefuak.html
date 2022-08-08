@@ -38,8 +38,8 @@
                         -ms-transition: opacity .5s ease-in-out;
                         -o-transition: opacity .5s ease-in-out;
                         transition: opacity .5s ease-in-out;}
-            #floater{flex-grow:1; margin:50px;border-radius: 50%; background: white; width:200px; height:200px; z-index:-1; filter: blur(10px);}
-            
+            #floater{flex-grow:1; margin:50px;border-radius: 50%; background: white; width:200px; height:200px; z-index:-1; transform: scale(0.5);box-shadow: inset 8px 8px 12px  #b6cae4;}
+            #startStopDiv{margin-top:1.5em;}
             
         </style>
         <style id="style2">
@@ -62,7 +62,7 @@
                 <h1 id="breatheStep">&nbsp;</h1>
                 <div class="" id="floater"></div>
                 <div id="startStopDiv">
-                    <button class="btn btn-light" onclick="start()">Start</button>
+                    <button id="startBtn" class="btn btn-light" onclick="start()">Start</button>
                     <button class="btn btn-light" onclick="stop()">Stop</button>
                 </div>
                 
@@ -110,17 +110,18 @@
                     listTimeCummul += stepTime
                 }
             cycleTime = listTimeCummul
+            document.getElementById("startBtn").setAttribute("disabled",true)
             document.getElementById("floater").classList.add("animate")
-            console.log(parseInt(timers[steps[2]])/cycleTime*100)
+
             time1=parseInt(timers[steps[0]])/cycleTime*100
             time2=parseInt(timers[steps[1]])/cycleTime*100+time1
             time3=parseInt(timers[steps[2]])/cycleTime*100+time2
             document.getElementById("style2").innerHTML = `@keyframes ripple{
-                        0%{transform: scale(1);}
+                        0%{transform: scale(0.5);}
                         ${time1}%{transform: scale(1.4);}
                         ${time2}%{transform: scale(1.4);}
-                        ${time3}%{transform: scale(1);}
-                        100%{transform: scale(1);}
+                        ${time3}%{transform: scale(0.5);}
+                        100%{transform: scale(0.5);}
                     }
                     .animate{animation: ripple ${cycleTime}s infinite;}`
 
@@ -146,6 +147,7 @@
             clearInterval(myInterval)
             document.getElementById("breatheStep").innerHTML = "&nbsp;"
             document.getElementById("floater").classList.remove("animate")
+            document.getElementById("startBtn").removeAttribute("disabled")
         }
     </script>
 </html>
