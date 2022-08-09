@@ -133,11 +133,9 @@
                     .animate{animation: ripple ${cycleTime}s infinite;}`
 
             function oneSecondFunc() {
-                
+                //console.log(time)
                 breatheTimeAndStep = timeTranslate[time%cycleTime].toString().replace(',',' &nbsp; ')
-                breatheStep.style.opacity = 0
                 breatheStep.innerHTML = breatheTimeAndStep
-                breatheStep.style.opacity = 1
                 time++
             }
 
@@ -158,4 +156,3 @@
         }
     </script>
 </html>
-
